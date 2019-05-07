@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Composers\GeneralComposer;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -11,18 +12,9 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
+    public function register(): void
     {
-        //
-    }
-
-    /**
-     * Bootstrap any application services.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        //
+       // View Composers 
+       view()->composer('*', GeneralComposer::class);
     }
 }

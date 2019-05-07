@@ -43,7 +43,7 @@
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Tim Joosten
+                        {{ $currentUser->name }}
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="accountDropdown">
