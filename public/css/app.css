@@ -10670,6 +10670,11 @@ a.text-dark:focus {
   /* iOS 4.1- */
 }
 
+.icon i,
+.icon a {
+  vertical-align: -1px;
+}
+
 .fe {
   font-family: "feather" !important;
   speak: none;
@@ -11771,6 +11776,23 @@ a.text-dark:focus {
 
 .page-options {
   margin-left: auto;
+}
+
+.list-group-item.active .icon {
+  color: inherit !important;
+}
+
+.list-group-transparent .list-group-item {
+  background: none;
+  border: 0;
+  padding: 0.5rem 1rem;
+  border-radius: 3px;
+}
+
+.list-group-transparent .list-group-item.active {
+  background: #FCEBEA;
+  color: #CC1F1A;
+  font-weight: 600;
 }
 
 .navbar-laravel {

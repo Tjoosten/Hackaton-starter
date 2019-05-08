@@ -43,11 +43,11 @@
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        {{ $currentUser->name }}
+                        <i class="fe fe-user mr-1"></i> {{ $currentUser->name }}
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="accountDropdown">
-                        <a class="dropdown-item" href="">
+                        <a class="dropdown-item" href="{{ route('profile.settings') }}">
                             <i class="fe fe-sliders mr-1 text-secondary"></i> Settings
                         </a>
 

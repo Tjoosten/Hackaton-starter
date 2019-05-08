@@ -7,6 +7,11 @@
 	url('../fonts/feather/feather-webfont.svg?t=1501841394106#feather') format('svg'); /* iOS 4.1- */
 }
 
+.icon i,
+.icon a {
+  vertical-align: -1px;
+}
+
 .fe {
 	font-family: 'feather' !important;
 	speak: none;

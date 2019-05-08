@@ -1,4 +1,5 @@
 <?php
+use App\Http\Controllers\Users\Profile\SettingsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,8 +14,12 @@
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome.test');
 
 Auth::routes();
+
+// Account settings routes 
+Route::patch('/account/settings/security', [SettingsController::class, 'updateSecurity'])->name('profile.settings.update.security');
+Route::get('/account/settings/{type?}', [SettingsController::class, 'index'])->name('profile.settings');
 
 Route::get('/home', 'HomeController@index')->name('home');
