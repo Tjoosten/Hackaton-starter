@@ -71,6 +71,12 @@
             <a class="nav-link" href="">
                 <i class="fe fe-home mr-1 text-secondary"></i> Dashboard
             </a>
+
+            @hasanyrole('admin|webmaster')
+                <a class="nav-link {{ active('audit.index') }}" href="{{ route('audit.index') }}">
+                    <i class="fe fe-activity mr-1 text-secondary"></i> Audit
+                </a>
+            @endhasanyrole
         </nav>
     </div>
 

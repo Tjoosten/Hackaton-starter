@@ -1,5 +1,6 @@
 <?php
 use App\Http\Controllers\Users\Profile\SettingsController;
+use App\Http\Controllers\AuditController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +18,9 @@ Route::get('/', function () {
 })->name('welcome.test');
 
 Auth::routes();
+
+// Audit routes 
+Route::get('/audit', [AuditController::class, 'index'])->name('audit.index');
 
 // Account settings routes 
 Route::patch('/account/settings/security', [SettingsController::class, 'updateSecurity'])->name('profile.settings.update.security');
