@@ -3,8 +3,8 @@
 namespace App;
 
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Spatie\Permission\traits\HasRoles;
 
 /**
  * Class User
@@ -13,7 +13,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  */
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, HasRoles;
 
     /** @var array $fillable The attributes that are mass assignable. */
     protected $fillable = ['firstname', 'lastname', 'email', 'password'];
@@ -33,5 +33,15 @@ class User extends Authenticatable
     public function setPasswordAttribute(string $password): void 
     {
         $this->attributes['password'] = bcrypt($password);   
+    }
+
+    /**
+     * Get the user's full name.
+     *
+     * @return string
+     */
+    public function getNameAttribute(): string
+    {
+        return ucfirst($this->firstname) . ' ' . ucfirst($this->lastname);
     }
 }

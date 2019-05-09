@@ -42,7 +42,7 @@ class SettingsController extends Controller
     }
 
     /**
-     * Method for up-dating his security settings in the application. 
+     * Method for updating his security settings in the application. 
      * 
      * @param  PasswordValidator $input The form request class that handles the validation.
      * @return RedirectResponse

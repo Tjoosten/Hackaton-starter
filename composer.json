@@ -14,6 +14,8 @@
         "laracasts/flash": "^3.0",
         "laravel/framework": "5.8.*",
         "laravel/tinker": "^1.0",
+        "spatie/laravel-permission": "^2.37",
+        "spatie/seeders": "^5.1",
         "watson/active": "^3.1"
     },
     "require-dev": {
@@ -24,6 +26,12 @@
         "nunomaduro/collision": "^2.0",
         "phpunit/phpunit": "^7.5"
     },
+    "repositories": [
+        { 
+            "type": "composer", 
+            "url": "https://satis.spatie.be/" 
+        } 
+    ],
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
