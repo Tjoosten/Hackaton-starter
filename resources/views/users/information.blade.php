@@ -11,12 +11,13 @@
     <div class="container-fluid pb-3">
         <div class="row">
             <div class="col-md-9">
-                <form method="POST" action="" class="card card-body border-0 shadow-sm">
+                <form method="POST" action="{{ route('profile.settings.update.info') }}" class="card card-body border-0 shadow-sm">
                     <h6 class="border-bottom border-gray pb-1 mb-3">Account information</h6>
 
-                    @method ('PATCH')   {{-- HTTP method spoofing --}}
-                    @csrf               {{-- Form field protection --}}
-                    @form($user)        {{-- Bind user data to the form --}}
+                    @method ('PATCH')           {{-- HTTP method spoofing --}}
+                    @csrf                       {{-- Form field protection --}}
+                    @form($user)                {{-- Bind user data to the form --}}
+                    @include ('flash::message') {{-- Flash session view partial --}}
 
                     <div class="form-row">
                         <div class="form-group col-6">

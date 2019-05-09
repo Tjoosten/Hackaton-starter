@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\Users\Settings\PasswordValidator;
+use App\Http\Requests\Users\Settings\InformationValidator;
 
 /**
  * Class SettingsController 
@@ -42,6 +43,22 @@ class SettingsController extends Controller
     }
 
     /**
+     * Method for updating the account information in the application. 
+     *
+     *  
+     * @param  InformationValidator $input The form request class that handles the validation.
+     * @return RedirectResponse
+     */
+    public function updateInformation(InformationValidator $input): RedirectResponse 
+    { 
+        if ($this->getAuthenticatedUser()->update($input->all())) {
+            flash('Your account information as been updated.');
+        }
+
+        return redirect()->route('profile.settings');
+    }
+
+    /**
      * Method for updating his security settings in the application. 
      * 
      * @param  PasswordValidator $input The form request class that handles the validation.
@@ -49,7 +66,7 @@ class SettingsController extends Controller
      */
     public function updateSecurity(PasswordValidator $input): RedirectResponse
     {
-        if ($this->getAuthenticatedUser()->update(['password' => $input->password])) {
+        if ($this->getAuthenticatedUser()->update($input->all())) {
             flash('Your account security has been updated.')->important();
         }
 

@@ -20,6 +20,7 @@ Auth::routes();
 
 // Account settings routes 
 Route::patch('/account/settings/security', [SettingsController::class, 'updateSecurity'])->name('profile.settings.update.security');
+Route::patch('/account/settings/information', [SettingsController::class, 'updateInformation'])->name('profile.settings.update.info');
 Route::get('/account/settings/{type?}', [SettingsController::class, 'index'])->name('profile.settings');
 
 Route::get('/home', 'HomeController@index')->name('home');
