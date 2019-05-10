@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Contracts\Support\Renderable;
-use Illuminate\Http\Request;
+use Spatie\Activitylog\Models\Activity;
 
 /**
  * Class AuditController
@@ -29,6 +29,7 @@ class AuditController extends Controller
      */
     public function index(): Renderable
     {
-        // TODO: Controller logic and view.
+        $logs = Activity::simplePaginate();
+        return view('audit.overview', compact('logs'));
     }
 }

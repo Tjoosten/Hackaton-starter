@@ -1,6 +1,8 @@
 <?php
+
 use App\Http\Controllers\Users\Profile\SettingsController;
 use App\Http\Controllers\AuditController;
+use App\Http\Controllers\Users\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +23,9 @@ Auth::routes();
 
 // Audit routes 
 Route::get('/audit', [AuditController::class, 'index'])->name('audit.index');
+
+// User management routes
+Route::get('/users', [DashboardController::class, 'index'])->name('users.dashboard');
 
 // Account settings routes 
 Route::patch('/account/settings/security', [SettingsController::class, 'updateSecurity'])->name('profile.settings.update.security');
