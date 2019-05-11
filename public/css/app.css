@@ -11795,6 +11795,16 @@ a.text-dark:focus {
   font-weight: 600;
 }
 
+.badge-offline {
+  color: #E3342F !important;
+  background-color: #FCEBEA;
+}
+
+.badge-online {
+  color: #38C172 !important;
+  background-color: #E3FCEC;
+}
+
 .navbar-laravel {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);

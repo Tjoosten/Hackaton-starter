@@ -39,6 +39,11 @@
                                 <td>{{ $user->name }}</td>
                                 
                                 <td> {{-- Status indicator --}}
+                                    @if ($user->isOnline())
+                                        <span class="badge badge-online">Online</span>
+                                    @else {{-- User is not online --}}
+                                        <span class="badge badge-offline">Offline</span>
+                                    @endif
                                 </td> {{-- /// END status indicator --}}
 
                                 <td>{{ $user->email }}</td>
