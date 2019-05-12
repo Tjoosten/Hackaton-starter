@@ -7,7 +7,7 @@
             <div class="page-subtitle">Dashboard</div>
 
             <div class="d-flex page-options">
-                <a href="" class="btn btn-secondary">
+                <a href="{{ route('users.create') }}" class="btn btn-secondary">
                     <i class="fe fe-user-plus"></i>
                 </a>
 

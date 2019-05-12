@@ -26,6 +26,8 @@ Route::get('/audit', [AuditController::class, 'index'])->name('audit.index');
 
 // User management routes
 Route::get('/users', [DashboardController::class, 'index'])->name('users.dashboard');
+Route::get('/users/new', [DashboardController::class, 'create'])->name('users.create');
+Route::post('/users/new', [DashboardController::class, 'store'])->name('users.store');
 
 // Account settings routes 
 Route::patch('/account/settings/security', [SettingsController::class, 'updateSecurity'])->name('profile.settings.update.security');
