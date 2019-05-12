@@ -59,7 +59,7 @@
                         <div class="form-group col-12">
                             <label for="role">Permission role(s) <span class="text-danger">*</span></label>
 
-                            <select id="role" aria-describedby="roleHelpBlock" @input('roles') class="form-control @error('roles', 'is-invalid')" multiple>
+                            <select id="role" aria-describedby="roleHelpBlock" @input('roles[]') class="form-control @error('roles', 'is-invalid')" multiple>
                                 @options($roles, 'roles', ['user'])
                             </select>
 

@@ -33,9 +33,9 @@ class StoreValidator extends FormRequest
     {
         return [
             'firstname' => ['required', 'string', 'max:255'], 
-            'lastname'  => '', 
+            'lastname'  => ['required', 'string', 'max:255'], 
             'email'     => ['required', 'string', 'email', 'max:255', 'unique:users'], 
-            'roles'     => '',
+            'roles'     => ['required', 'array', 'min:1'],
         ];
     }
 }

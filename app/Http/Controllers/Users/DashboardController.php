@@ -57,8 +57,6 @@ class DashboardController extends Controller
     /**
      * Method for storing the new user in the application. 
      * 
-     * @todo Build up the validator 
-     * 
      * @param  StoreValidator $input    The from request class that handles the validation.
      * @param  User           $user     The database model for the user table. 
      * @return RedirectResponse
