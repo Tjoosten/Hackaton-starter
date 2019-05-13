@@ -59,8 +59,6 @@ class DashboardController extends Controller
     /**
      * Method for storing the new user in the application. 
      * 
-     * @todo Implement notification.
-     * 
      * @param  StoreValidator $input    The from request class that handles the validation.
      * @param  User           $user     The database model for the user table. 
      * @return RedirectResponse
@@ -79,5 +77,23 @@ class DashboardController extends Controller
         } 
 
         return redirect()->route('users.create');
+    }
+
+    /**
+     * Method for deleting an user in the application.
+     * 
+     * @param  Request $request The request instance that holds all the request information. 
+     * @param  User    $user    The resource entity from the given user. 
+     * @return View|RedirectResponse 
+     */
+    public function destroy(Request $request, User $user) 
+    {
+        if ($request->isMethod('GET')) {
+            // TODO: Build up the application views. 
+            $viewPath = ($this->getAuthenticatedUser()->is($user)) ? 'users.settings.delete' : 'users.delete';
+            return view($viewPath, compact('user'));
+        } 
+
+        // TODO: Implement the logic for the HTTP - DELETE method.
     }
 }

@@ -28,6 +28,7 @@ Route::get('/audit', [AuditController::class, 'index'])->name('audit.index');
 Route::get('/users', [DashboardController::class, 'index'])->name('users.dashboard');
 Route::get('/users/new', [DashboardController::class, 'create'])->name('users.create');
 Route::post('/users/new', [DashboardController::class, 'store'])->name('users.store');
+Route::match(['get', 'delete'], 'users/delete/{user}', [DashboardController::class, 'destroy'])->name('users.delete');
 
 // Account settings routes 
 Route::patch('/account/settings/security', [SettingsController::class, 'updateSecurity'])->name('profile.settings.update.security');

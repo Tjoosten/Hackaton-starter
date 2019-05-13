@@ -29,7 +29,7 @@ class AuditController extends Controller
      */
     public function index(): Renderable
     {
-        $logs = Activity::simplePaginate();
+        $logs = Activity::latest()->simplePaginate();
         return view('audit.overview', compact('logs'));
     }
 }

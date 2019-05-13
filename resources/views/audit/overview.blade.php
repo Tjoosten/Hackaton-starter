@@ -22,7 +22,6 @@
                 <table class="table table-sm mb-0 table-hover">
                     <thead>
                         <tr>
-                            <th scope="col" class="border-top-0">#</th>
                             <th scope="col" class="border-top-0">Causer</th>
                             <th scope="col" class="border-top-0">Category</th>
                             <th scope="col" class="border-top-0">Message</th>
@@ -32,10 +31,14 @@
                     <tbody>
                         @forelse ($logs as $log) {{-- Audit log loop --}}
                             <tr>
+                                <td class="font-weight-bold">{{ $log->causer->name }}</td>
+                                <td>{{ $log->log_name }}</td>
+                                <td>{{ $log->description }}</td>
+                                <td>{{ $log->created_at->diffForHumans() }}</td>
                             </tr>
                         @empty {{-- <There are no audit logs found  --}}
                             <tr>
-                                <td class="text-secondary" colspan="5">
+                                <td class="text-secondary" colspan="4">
                                     There are currently no acivity logs found.
                                 </td>
                             </tr>

@@ -55,7 +55,7 @@
                                             <i class="fe fe-eye"></i>
                                         </a>
 
-                                        <a href="" class="text-decoration-none text-danger">
+                                        <a href="{{ route('users.delete', $user) }}" class="text-decoration-none text-danger">
                                             <i class="fe fe-trash-2"></i>
                                         </a>
                                     </span>
