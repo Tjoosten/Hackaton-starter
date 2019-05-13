@@ -90,8 +90,8 @@ class DashboardController extends Controller
      */
     public function destroy(Request $request, User $user) 
     {
-        if ($request->isMethod('GET')) {
-            // TODO: Build up the admin delete view
+        if ($request->isMethod('GET') && $this->getAuthenticatedUser()) {
+            // TODO: Build up the admin delete view -> IN PROGRESS
             $viewPath = ($this->getAuthenticatedUser()->is($user)) ? 'users.settings.delete' : 'users.delete';
             return view($viewPath, compact('user'));
         } 
