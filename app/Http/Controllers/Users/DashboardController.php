@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Password;
 use Spatie\Permission\Models\Role;
 use App\Http\Requests\Users\StoreValidator;
 use Illuminate\Support\Str;
+use App\Rules\PasswordCheck;
+use Illuminate\Http\Response;
 
 /**
  * Class DashboardController
@@ -26,7 +28,7 @@ class DashboardController extends Controller
      */
     public function __construct() 
     {
-        $this->middleware(['auth', 'role:admin|webmaster']);
+        $this->middleware(['auth', 'role:admin|webmaster'])->except('destroy');
     }
 
     /**
@@ -89,11 +91,24 @@ class DashboardController extends Controller
     public function destroy(Request $request, User $user) 
     {
         if ($request->isMethod('GET')) {
-            // TODO: Build up the application views. 
+            // TODO: Build up the admin delete view
             $viewPath = ($this->getAuthenticatedUser()->is($user)) ? 'users.settings.delete' : 'users.delete';
             return view($viewPath, compact('user'));
         } 
 
-        // TODO: Implement the logic for the HTTP - DELETE method.
+        // Proceed with the delete logic.
+        abort_if(! $this->getAuthenticatedUser()->hasRole('admin|webmaster'), Response::HTTP_FORBIDDEN);
+        $request->validate(['current_password' => ['required', new PasswordCheck()]]);
+
+        // Confirm if the given user is actually deleted. 
+        if ($user->delete()) {
+            if (! $this->getAuthenticatedUser()->is($user)) {
+                $this->logActivity("Has deleted the login form {$user->name}.", 'Users');
+            }
+
+            flash("The login from {$user->name} has been deleted in the application.")->important();
+        }
+
+        return redirect()->route('users.dashboard');
     }
 }

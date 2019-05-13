@@ -7,7 +7,7 @@
         <i class="fe icon fe-shield {{ active(route('profile.settings', ['type' => 'security']), 'font-weight-bold') }} mr-3"></i> Account security
     </a>
 
-    <a href="{{ route('users.delete', $currentUser) }}" class="list-group-item list-group-item-action">
+    <a href="{{ route('users.delete', $currentUser) }}" class="list-group-item {{ active('users.delete') }} list-group-item-action">
         <i class="fe icon mr-3 fe-trash-2"></i> Delete account
     </a>
 </div>
