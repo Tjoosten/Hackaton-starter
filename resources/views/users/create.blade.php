@@ -18,6 +18,7 @@
         <form method="POST" action="{{ route('users.store') }}" class="card card-body border-0 shadow-sm">
             <h6 class="border-bottom border-gray pb-1 mb-4">Create a new user</h6>
             @csrf {{-- form field protection --}}
+            @include ('flash::message') {{-- Flash session view partial --}}
 
              <div class="form-row">
                 <div class="col-3">

@@ -7,8 +7,10 @@ use Illuminate\Http\RedirectResponse;
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Support\Renderable;
 use App\User;
+use Illuminate\Support\Facades\Password;
 use Spatie\Permission\Models\Role;
 use App\Http\Requests\Users\StoreValidator;
+use Illuminate\Support\Str;
 
 /**
  * Class DashboardController
@@ -47,7 +49,7 @@ class DashboardController extends Controller
      */
     public function create(Role $roles): Renderable 
     {
-        // We duplicate the name column because the ->assignRole(); method form spatie/laravel-permissions
+        // We duplicate the name column because the ->assignRole(); method from spatie/laravel-permissions
         // Works bases on the role name not the id. The other 'name' is used to display the role name. 
 
         $roles = $roles->pluck('name', 'name');
@@ -57,12 +59,25 @@ class DashboardController extends Controller
     /**
      * Method for storing the new user in the application. 
      * 
+     * @todo Implement notification.
+     * 
      * @param  StoreValidator $input    The from request class that handles the validation.
      * @param  User           $user     The database model for the user table. 
      * @return RedirectResponse
      */
     public function store(StoreValidator $input, User $user): RedirectResponse
     {
-        dd($input->all());
+        $password = Str::random(9);
+        $input->merge(['password' => $password]);
+
+        if ($user = $user->create($input->except('role'))) {
+            $user->syncRoles($input->roles);
+
+            $this->logActivity("Created a user ({$user->name}) in the application.", 'Users');
+            flash("The login for {$user->name} has been created in the application.")->important();
+            Password::sendResetLink(['email' => $input->email]); // Send an reset link for the password to the user. 
+        } 
+
+        return redirect()->route('users.create');
     }
 }

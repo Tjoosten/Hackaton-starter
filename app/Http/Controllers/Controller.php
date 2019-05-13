@@ -26,4 +26,17 @@ class Controller extends BaseController
     {
         return auth()->user();
     }
+
+    /**
+     * Method for logging activities in the application to the audit log. 
+     * 
+     * @param  string $message  The message that needs to be logged. 
+     * @param  string $name     The audit category name. Defaults to General 
+     * @return void
+     */
+    public function logActivity(string $message, string $name = 'General'): void 
+    {
+        $user = $this->getAuthenticatedUser();
+        activity($name)->causedBy($user)->log($message);
+    }
 }
