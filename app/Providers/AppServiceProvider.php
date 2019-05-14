@@ -5,6 +5,11 @@ namespace App\Providers;
 use App\Composers\GeneralComposer;
 use Illuminate\Support\ServiceProvider;
 
+/**
+ * Class AppServiceProvider
+ * 
+ * @package App\Providers
+ */
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -14,7 +19,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-       // View Composers 
-       view()->composer('*', GeneralComposer::class);
+        // View Composers 
+        view()->composer('*', GeneralComposer::class);
+
+        if ($this->app->isLocal()) {
+            $this->app->register(TelescopeServiceProvider::class);
+        }
     }
 }
