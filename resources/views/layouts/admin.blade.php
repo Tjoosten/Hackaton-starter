@@ -23,7 +23,7 @@
 <div id="app">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <img src="{{ config('platform.thumbnails.navbar') }}" width="25" height="25" class="mr-3 rounded-circle d-inline-block align-top" alt="{{ config('app.name', 'Laravel') }}">
-        <a class="navbar-brand mr-auto mr-lg-0" href="#">{{ config('app.name', 'Laravel') }}</a>
+        <a class="navbar-brand mr-auto mr-lg-0" href="{{ url('/') }}">{{ config('app.name', 'Laravel') }}</a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -66,23 +66,26 @@
         </div>
     </nav>
 
-    <div class="nav-scroller bg-white shadow-sm">
-        <nav class="nav nav-underline">
-            <a class="nav-link" href="">
-                <i class="fe fe-home mr-1 text-secondary"></i> Dashboard
-            </a>
+    {{-- check for role this view is shared for the account settings an notifications --}}
+    @hasanyrole('admin|webmaster')
+        <div class="nav-scroller bg-white shadow-sm">
+            <nav class="nav nav-underline">
+                <a class="nav-link" href="">
+                    <i class="fe fe-home mr-1 text-secondary"></i> Dashboard
+                </a>
 
-            @hasanyrole('admin|webmaster')
-                <a class="nav-link {{ active('users.dashboard') }}" href="{{ route('users.dashboard') }}">
-                    <i class="fe fe-users mr-1 text-secondary"></i> Users
-                </a>
-                
-                <a class="nav-link {{ active('audit.index') }}" href="{{ route('audit.index') }}">
-                    <i class="fe fe-activity mr-1 text-secondary"></i> Audit
-                </a>
-            @endhasanyrole
-        </nav>
-    </div>
+                @hasanyrole('admin|webmaster')
+                    <a class="nav-link {{ active('users.dashboard') }}" href="{{ route('users.dashboard') }}">
+                        <i class="fe fe-users mr-1 text-secondary"></i> Users
+                    </a>
+                    
+                    <a class="nav-link {{ active('audit.index') }}" href="{{ route('audit.index') }}">
+                        <i class="fe fe-activity mr-1 text-secondary"></i> Audit
+                    </a>
+                @endhasanyrole
+            </nav>
+        </div>
+    @endhasanyrole
 
     <main role="main">
         @yield('content')

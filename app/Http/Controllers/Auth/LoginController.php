@@ -48,4 +48,12 @@ class LoginController extends Controller
             'last_login_ip' => $request->getClientIp()
         ]);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function redirectTo()
+    {
+        return url('/');
+    }
 }
