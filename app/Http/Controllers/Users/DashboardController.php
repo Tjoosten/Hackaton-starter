@@ -12,7 +12,6 @@ use Spatie\Permission\Models\Role;
 use App\Http\Requests\Users\StoreValidator;
 use Illuminate\Support\Str;
 use App\Rules\PasswordCheck;
-use Illuminate\Http\Response;
 
 /**
  * Class DashboardController
@@ -91,13 +90,12 @@ class DashboardController extends Controller
     public function destroy(Request $request, User $user) 
     {
         if ($request->isMethod('GET') && $this->getAuthenticatedUser()) {
-            // TODO: Build up the admin delete view -> IN PROGRESS
             $viewPath = ($this->getAuthenticatedUser()->is($user)) ? 'users.settings.delete' : 'users.delete';
             return view($viewPath, compact('user'));
         } 
 
         // Proceed with the delete logic.
-        abort_if(! $this->getAuthenticatedUser()->hasRole('admin|webmaster'), Response::HTTP_FORBIDDEN);
+        abort_if($this->getAuthenticatedUser()->is($user) || ! $this->getAuthenticatedUser()->hasRole('admin|webmaster'), 403);
         $request->validate(['current_password' => ['required', new PasswordCheck()]]);
 
         // Confirm if the given user is actually deleted. 

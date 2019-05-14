@@ -19,6 +19,7 @@
     </div>
 
     <div class="container-fluid pb-3">
+        @include('flash::message') {{-- Flash session view partial --}}
         <div class="card card-body border-0 shadow-sm">
             <div class="table-responsive">
                 <table class="table table-sm table-hover mb-0">
