@@ -12,6 +12,7 @@ use Spatie\Permission\Models\Role;
 use App\Http\Requests\Users\StoreValidator;
 use Illuminate\Support\Str;
 use App\Rules\PasswordCheck;
+use App\Http\Requests\Users\Settings\InformationValidator;
 
 /**
  * Class DashboardController
@@ -27,7 +28,8 @@ class DashboardController extends Controller
      */
     public function __construct() 
     {
-        $this->middleware(['auth', 'role:admin|webmaster'])->except('destroy');
+        $this->middleware('auth');
+        $this->middleware('role:admin|webmaster')->except(['destroy', 'show']);
     }
 
     /**
@@ -43,6 +45,23 @@ class DashboardController extends Controller
     }
 
     /**
+     * Method for displaying the user information in the application. 
+     * 
+     * @param  User $user The resource entity from the given user. 
+     * @return Renderable
+     */
+    public function show(User $user): Renderable 
+    {
+        // If the authenticated user is not the given user. We need the view authorization check. 
+        if (! $this->getAuthenticatedUser()->is($user)) {
+            $this->authorize('view', User::class);
+        }
+
+        $cantEdit = ! $this->getAuthenticatedUser()->cannot('update', $user);
+        return view('users.information', compact('user', 'cantEdit'));
+    }
+
+    /**
      * Method to render the view for creating new users in the application. 
      * 
      * @param  Role $role The database model class fot the ACl roles in the application. 
@@ -55,6 +74,27 @@ class DashboardController extends Controller
 
         $roles = $roles->pluck('name', 'name');
         return view('users.create', ['roles' => $roles->all()]);
+    }
+
+    /**
+     * Method for updating the account information in the application. 
+     *
+     * @param  InformationValidator $input The form request class that handles the validation.
+     * @param  User                 $user  The resource entity from the given user. 
+     * @return RedirectResponse
+     */
+    public function update(InformationValidator $input, User $user): RedirectResponse 
+    { 
+        if ($user->update($input->all())) {
+            if (! $this->getAuthenticatedUser()->is($user)) {
+                $this->logActivity('Updated the account information from' . $user->name, 'Users');
+                flash("The account information from {$user->name} has been updated");
+            } else {
+                flash('Your account information as been updated.');
+            }
+        }
+
+        return redirect()->route('users.show', $user);
     }
 
     /**
@@ -101,7 +141,7 @@ class DashboardController extends Controller
         // Confirm if the given user is actually deleted. 
         if ($user->delete()) {
             if (! $this->getAuthenticatedUser()->is($user)) {
-                $this->logActivity("Has deleted the login form {$user->name}.", 'Users');
+                $this->logActivity("Has deleted the login from {$user->name}.", 'Users');
             }
 
             flash("The login from {$user->name} has been deleted in the application.")->important();

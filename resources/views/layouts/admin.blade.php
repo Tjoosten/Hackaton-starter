@@ -47,7 +47,7 @@
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="accountDropdown">
-                        <a class="dropdown-item" href="{{ route('profile.settings') }}">
+                        <a class="dropdown-item" href="{{ route('users.show', $currentUser) }}">
                             <i class="fe fe-sliders mr-1 text-secondary"></i> Settings
                         </a>
 

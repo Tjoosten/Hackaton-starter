@@ -9,8 +9,9 @@ use Illuminate\Database\Seeder;
  */
 class UserTableSeeder extends Seeder
 {
-    const ADMIN = 'admin'; 
-    const USER  = 'user';
+    const ADMIN        = 'admin'; 
+    const USER         = 'user';
+    const WEBMASTER    = 'webmaster';
 
     /**
      * Run the database seeds.
@@ -28,6 +29,10 @@ class UserTableSeeder extends Seeder
             if ($this->isInAdminArray($user->email)) {
                 $user->assignRole(self::ADMIN);
             }
+
+            if ($this->isInWebmasterArray($user->email)) {
+                $user->assignRole(self::WEBMASTER);
+            }
             
             $user->assignRole(self::USER);
         });
@@ -39,7 +44,7 @@ class UserTableSeeder extends Seeder
     }
 
      /**
-     * Determine if the given address is an webmaster in the application.
+     * Determine if the given address is an administrator in the application.
      *
      * @return bool
      */
@@ -49,7 +54,17 @@ class UserTableSeeder extends Seeder
     }
 
     /**
-     * The array of email addresses that are webmasters in the application.
+     * Determine if the given address is an webmaster in the application.
+     *
+     * @return bool
+     */
+    protected function isInWebmasterArray(string $email): bool
+    {
+        return in_array($email, $this->organisationWebmasters());
+    }
+
+    /**
+     * The array of email addresses that are admins in the application.
      *
      * @return array
      */
@@ -57,6 +72,17 @@ class UserTableSeeder extends Seeder
     {
         return ['admin@domain.tld'];
     }
+
+    /**
+     * The array of email addresses that are webmasters in the application.
+     *
+     * @return array
+     */
+    protected function organisationWebmasters(): array
+    {
+        return ['webmaster@domain.tld'];
+    }
+
     /**
      * Get the list of the members in the non profit organisation.
      * This list is also used in the creation of the basic logins
@@ -66,7 +92,7 @@ class UserTableSeeder extends Seeder
      */
     protected function organisationMembers(): array
     {
-        return [['admin', 'user'], ['normal', 'user']];
+        return [['admin', 'user'], ['normal', 'user'], ['webmaster', 'user']];
     }
     /**
      * Method for creating the actual logins.

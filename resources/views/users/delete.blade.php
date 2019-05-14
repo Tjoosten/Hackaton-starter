@@ -52,7 +52,7 @@
             </div>
 
             <div class="col-md-3">
-                @include('users._partials.sidenav-admin', ['user' => $user])
+                @include('users._partials.sidenav', ['user' => $user])
             </div>
         </div>
     </div>

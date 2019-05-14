@@ -14,7 +14,7 @@ use App\Http\Requests\Users\Settings\InformationValidator;
  * 
  * @package App\Http\Controllers\Users\Profile
  */
-class SettingsController extends Controller
+class SecurityController extends Controller
 {
     /**
      * Create new SettingsController constructor 
@@ -29,33 +29,11 @@ class SettingsController extends Controller
     /**
      * Get the settings overview page for the authenticated user. 
      * 
-     * @param  string|null $type Type of of settings the user wants to change. 
      * @return Renderable 
      */
-    public function index(string $type = null): Renderable
+    public function index(): Renderable
     {
-        $user = $this->getAuthenticatedUser();
-        
-        switch ($type) { // Display the settings page based on the given type in the URI.
-            case 'security':    return view('users.settings.security', compact('user'));
-            default:            return view('users.information', compact('user'));
-        }
-    }
-
-    /**
-     * Method for updating the account information in the application. 
-     *
-     *  
-     * @param  InformationValidator $input The form request class that handles the validation.
-     * @return RedirectResponse
-     */
-    public function updateInformation(InformationValidator $input): RedirectResponse 
-    { 
-        if ($this->getAuthenticatedUser()->update($input->all())) {
-            flash('Your account information as been updated.');
-        }
-
-        return redirect()->route('profile.settings');
+        return view('users.settings.security', ['user' => $this->getAuthenticatedUser()]);
     }
 
     /**
@@ -64,7 +42,7 @@ class SettingsController extends Controller
      * @param  PasswordValidator $input The form request class that handles the validation.
      * @return RedirectResponse
      */
-    public function updateSecurity(PasswordValidator $input): RedirectResponse
+    public function update(PasswordValidator $input): RedirectResponse
     {
         if ($this->getAuthenticatedUser()->update($input->all())) {
             flash('Your account security has been updated.')->important();
