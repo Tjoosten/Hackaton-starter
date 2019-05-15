@@ -32,8 +32,9 @@ Route::get('/users/{user}', [DashboardController::class, 'show'])->name('users.s
 Route::patch('/users/{user}', [DashboardController::class, 'update'])->name('profile.settings.update.info');
 Route::match(['get', 'delete'], 'users/delete/{user}', [DashboardController::class, 'destroy'])->name('users.delete');
 
+Route::get('/home', 'HomeController@index')->name('home');
+
 // Account settings routes 
 Route::patch('/account/settings/security', [SecurityController::class, 'update'])->name('profile.settings.update.security');
 Route::get('/account/settings/security', [SecurityController::class, 'index'])->name('profile.settings.security');
 
-Route::get('/home', 'HomeController@index')->name('home');

@@ -57,7 +57,7 @@ class DashboardController extends Controller
             $this->authorize('view', User::class);
         }
 
-        $cantEdit = ! $this->getAuthenticatedUser()->cannot('update', $user);
+        $cantEdit = $this->getAuthenticatedUser()->cannot('update', $user);
         return view('users.information', compact('user', 'cantEdit'));
     }
 
