@@ -36,16 +36,4 @@ class UserPolicy
     {
         return $user->hasAnyRole(['admin', 'webmaster']);
     } 
-
-    /**
-     * Determine whether the user can impersonate other users or not. 
-     * 
-     * @param  User $user  The user entity from the authenticated user
-     * @param  User $model The user entity from the authenticated user. 
-     * @return bool 
-     */
-    public function impersonate(User $user, User $model): bool 
-    {
-        return ! $user->is($model) && $user->hasRole('webmaster');
-    }
 }

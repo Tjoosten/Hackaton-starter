@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\traits\HasRoles;
 use Illuminate\Support\Facades\Cache;
+use Lab404\Impersonate\Models\Impersonate;
 
 /**
  * Class User
@@ -14,7 +15,7 @@ use Illuminate\Support\Facades\Cache;
  */
 class User extends Authenticatable
 {
-    use Notifiable, HasRoles;
+    use Notifiable, HasRoles, Impersonate;
 
     /** @var array $fillable The attributes that are mass assignable. */
     protected $fillable = ['firstname', 'lastname', 'email', 'password', 'last_login_at', 'last_login_ip'];

@@ -20,6 +20,7 @@ Route::get('/', function () {
 })->name('welcome.test');
 
 Auth::routes();
+Route::impersonate();
 
 // Audit routes 
 Route::get('/audit', [AuditController::class, 'index'])->name('audit.index');

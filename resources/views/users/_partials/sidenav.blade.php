@@ -9,11 +9,11 @@
         </a>
     @endif
 
-    @if ($currentUser->can('impersonate', $user))
-        <a href="" class="list-group-item list-group-item-action">
+    @canBeImpersonated($user)
+        <a href="{{ route('impersonate', $user->id) }}" class="list-group-item list-group-item-action">
             <i class="fe icon fe-log-in mr-3"></i> Impersonate account
         </a>
-    @endif
+    @endCanBeImpersonated
 
     <a href="{{ route('users.delete', $currentUser) }}" class="list-group-item {{ active('users.delete') }} list-group-item-action">
         <i class="fe icon mr-3 fe-trash-2"></i> Delete account

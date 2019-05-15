@@ -12,6 +12,12 @@
             </ul>
 
             <ul class="navbar-nav ml-auto">
+                @impersonating
+                    <span class="navbar-text text-danger mr-1">
+                        <i class="fe fe-alert-triangle mr-1"></i> Impersonated user
+                    </span>
+                @endImpersonating
+
                 <li class="nav-item">
                     <a class="nav-link" href="">
                         <i class="fe fe-bell mr-1"></i> 0
@@ -31,10 +37,16 @@
                         @endhasanyrole
 
                         <a class="dropdown-item" href="{{ route('users.show', $currentUser) }}">
-                            <i class="fe fe-sliders mr-1 text-secondary"></i> Settings
+                            <i class="fe fe-sliders mr-1 text-secondary"></i> Account settings
                         </a>
 
                         <div class="dropdown-divider"></div>
+
+                        @impersonating
+                            <a class="dropdown-item" href="{{ route('impersonate.leave') }}">
+                                <i class="fe text-danger mr-1 fe-log-out"></i> Leave impersonation
+                            </a>
+                        @endImpersonating
 
                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             <i class="fe text-danger mr-1 fe-power"></i> Afmelden
