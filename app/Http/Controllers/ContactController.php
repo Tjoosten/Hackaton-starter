@@ -13,11 +13,12 @@ use App\Http\Requests\ContactValidator;
  */
 class ContactController extends Controller
 {
-    public function index(): Renderable 
-    {
-        return view('contact');
-    }
-
+    /**
+     * Method for handling the contact form and notiying the webmaster(s)
+     * 
+     * @param  ContactValidator $input The form request class that handles the validation
+     * @return RedirectResponse
+     */
     public function handleResponse(ContactValidator $input): RedirectResponse
     {
         //

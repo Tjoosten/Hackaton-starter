@@ -22,7 +22,7 @@ Route::get('/', function () {
 Auth::routes();
 
 // Contact routes 
-Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
+Route::view('/contact', 'contact')->name('contact.index');
 Route::post('/contact', [ContactController::class, 'handleResponse'])->name('contact.response');
 
 // Account settings routes 
