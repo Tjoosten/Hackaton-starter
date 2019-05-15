@@ -27,7 +27,7 @@
     @hasanyrole('admin|webmaster')
         <div class="nav-scroller bg-white shadow-sm">
             <nav class="nav nav-underline">
-                <a class="nav-link" href="">
+                <a class="nav-link" href="{{ route('home') }}">
                     <i class="fe fe-home mr-1 text-secondary"></i> Dashboard
                 </a>
 

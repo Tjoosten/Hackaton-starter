@@ -8,7 +8,11 @@
 
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
             <ul class="navbar-nav mr-auto">
-                &nbsp;
+                    <li class="ml-2 nav-item">
+                    <a class="nav-link {{ active('contact.index') }}" href="{{ route('contact.index') }}">
+                        Contact
+                    </a>
+                </li>
             </ul>
 
             <ul class="navbar-nav ml-auto">
