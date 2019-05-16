@@ -2,23 +2,39 @@
 
 namespace App\Mail;
 
+use Illuminate\Database\Eloquent\Collection;
+use App\Models\FormResponse;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class ContactFormSubmitted extends Mailable
+/**
+ * Class ContactFormSubmitted
+ * 
+ * @package 
+ */
+class ContactFormSubmitted extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
+    /** @var \App\Models\FormResponse */
+    public $formResponse;
+    
     /**
      * Create a new message instance.
      *
-     * @return void
+     * @param \App\Models\FormResponse $formResponse
      */
-    public function __construct()
+    public function __construct(FormResponse $formResponse)
     {
-        //
+        $this->formResponse = $formResponse;
+    }
+
+    public function getRecipients(): Collection
+    {
+        // TODO: Register reciepients;
+        return [];
     }
 
     /**
@@ -28,6 +44,9 @@ class ContactFormSubmitted extends Mailable
      */
     public function build()
     {
-        return $this->view('view.name');
+        return $this
+            ->to($this->getRecipients())
+            ->subject('New reaction on ' . config('app.url'))
+            ->markdown('mails.admin.contactFormSubmitted');
     }
 }

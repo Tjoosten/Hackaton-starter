@@ -31,4 +31,14 @@ class ContactController extends Controller
 
         return redirect()->route('contact.index');
     }
+
+    /**
+     * Controller action function for downloading all the responses in the application. 
+     * 
+     * @return void
+     */
+    public function downloadAll(): void
+    {
+        FormResponse::downloadAll();
+    }
 }

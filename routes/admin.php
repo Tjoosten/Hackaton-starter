@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuditController;
 use App\Http\Controllers\Users\DashboardController;
+use App\Http\Controllers\ContactController;
 
 Route::impersonate();
 
@@ -14,3 +15,4 @@ Route::get('/users/new', [DashboardController::class, 'create'])->name('users.cr
 Route::post('/users/new', [DashboardController::class, 'store'])->name('users.store');
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/contact/download', [ContactController::class, 'downloadAll'])->name('responses.download');
