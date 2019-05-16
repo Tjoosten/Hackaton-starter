@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\ContactValidator;
+use App\Models\FormResponse;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ContactFormSubmitted;
 
 /**
  * Class ContactController
@@ -21,6 +24,11 @@ class ContactController extends Controller
      */
     public function handleResponse(ContactValidator $input): RedirectResponse
     {
+        if ($formResponse = FormResponse::create($input->all())) {
+            Mail::send(new ContactFormSubmitted($formResponse));
+            flash('Thanks for your reply. We wil get in touch soon!', 'success');
+        }
+
         return redirect()->route('contact.index');
     }
 }

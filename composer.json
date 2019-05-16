@@ -17,6 +17,7 @@
         "laravel/tinker": "^1.0",
         "spatie/laravel-activitylog": "^3.5",
         "spatie/laravel-permission": "^2.37",
+        "spatie/laravel-referer": "^1.4",
         "spatie/seeders": "^5.1",
         "watson/active": "^3.1"
     },

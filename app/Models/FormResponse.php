@@ -3,8 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Maatwebsite\Excel\Facades\Excel;    // <- Install needed
-use Spatie\Referer\Referer;             // <- Install needed
+use Spatie\Referer\Referer;
 
 /**
  * Class FormResponse 
@@ -23,6 +22,8 @@ class FormResponse extends Model
      */
     public static function boot(): void 
     {
+        parent::boot();
+
         static::creating(function (FormResponse $formResponse) {
             $formResponse->referer = app(Referer::class)->get();
         });
