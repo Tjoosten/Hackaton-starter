@@ -4,6 +4,11 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * Class ContactValidator 
+ * 
+ * @package App\Http\Requests
+ */
 class ContactValidator extends FormRequest
 {
     /**
@@ -11,9 +16,9 @@ class ContactValidator extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,10 +26,13 @@ class ContactValidator extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            //
+            'name'      => ['required', 'string'],
+            'message'   => ['required', 'string'],
+            'subject'   => ['required', 'string', 'max:255'],
+            'email'     => ['required', 'email'],
         ];
     }
 }

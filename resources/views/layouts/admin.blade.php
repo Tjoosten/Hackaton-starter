@@ -36,6 +36,10 @@
                         <i class="fe fe-users mr-1 text-secondary"></i> Users
                     </a>
                     
+                    <a class="nav-link" href="">
+                        <i class="fe fe-list mr-1 text-secondary"></i> Responses
+                    </a>
+
                     <a class="nav-link {{ active('audit.index') }}" href="{{ route('audit.index') }}">
                         <i class="fe fe-activity mr-1 text-secondary"></i> Audit
                     </a>

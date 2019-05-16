@@ -26,12 +26,12 @@
                 </div>
 
                 <div class="col-4 form-group">
-                    <input type="text" @input('phone_number') class="form-control @error('phone_number', 'is_invalid')" placeholder="Your phone number">
+                    <input type="text" @input('phone_number') class="form-control @error('phone_number', 'is-invalid')" placeholder="Your phone number">
                     @error('phone_number')
                 </div>
 
                 <div class="col-12 form-group">
-                    <input type="text" @input('subject') class="form-control" @error('subject', 'is_invalid') placeholder="Subject">
+                    <input type="text" @input('subject') class="form-control @error('subject', 'is-invalid')" placeholder="Subject">
                     @error('subject')
                 </div>
                 

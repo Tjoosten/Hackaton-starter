@@ -14,13 +14,13 @@ use App\Http\Requests\ContactValidator;
 class ContactController extends Controller
 {
     /**
-     * Method for handling the contact form and notiying the webmaster(s)
+     * Method for handling the contact form and notifying the webmaster(s)
      * 
      * @param  ContactValidator $input The form request class that handles the validation
      * @return RedirectResponse
      */
     public function handleResponse(ContactValidator $input): RedirectResponse
     {
-        //
+        return redirect()->route('contact.index');
     }
 }
