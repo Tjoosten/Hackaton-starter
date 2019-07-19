@@ -1,7 +1,10 @@
 <?php
 
-use Illuminate\Database\Seeder;
+use Spatie\Seeders\DatabaseSeeder as Seeder;
 
+/**
+ * Class DatabaseSeeder
+ */
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -9,8 +12,12 @@ class DatabaseSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
-        // $this->call(UsersTableSeeder::class);
+        parent::run();
+
+        // Run additional database seeder. 
+        $this->call(RoleTableSeeder::class);
+        $this->call(UserTableSeeder::class);
     }
 }
